@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportInformationCenter", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineSAS", "AirlineSAS\AirlineSAS.csproj", "{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineKLM", "AirlineKLM\AirlineKLM.csproj", "{E1C79430-B87A-4377-A3F7-FF73EDC972F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C79430-B87A-4377-A3F7-FF73EDC972F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C79430-B87A-4377-A3F7-FF73EDC972F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C79430-B87A-4377-A3F7-FF73EDC972F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C79430-B87A-4377-A3F7-FF73EDC972F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

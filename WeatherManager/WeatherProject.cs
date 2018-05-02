@@ -23,9 +23,13 @@ namespace WeatherManager
             var airlineSASInput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Airline_SAS_To_Weather);
             var airlineSASOutput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_Airline_SAS);
 
+            var airlineKLMInput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Airline_KLM_To_Weather);
+            var airlineKLMOutput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_Airline_KLM);
+
             ReceiveInputFromAirTrafficControlCenter(airTrafficControlCenterInput, airTrafficControlCenterOutput);
             ReceiveInputFromAirportInformationCenter(airportInformationCenterInput, airportInformationCenterOutput);
             ReceiveInputFromAirlineSAS(airlineSASInput, airlineSASOutput);
+            ReceiveInputFromAirlineKLM(airlineKLMInput, airlineKLMOutput);
 
             while (Console.ReadLine() != "exit")
             {
@@ -87,6 +91,27 @@ namespace WeatherManager
 
                 var reply = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location));
                 Console.WriteLine("Responding with object:");
+                Console.WriteLine(reply);
+
+                outputQueue.Send(reply, location);
+
+                messageQueue.BeginReceive();
+            });
+            inputChannel.BeginReceive();
+        }
+
+        private static void ReceiveInputFromAirlineKLM(MessageQueue inputChannel, MessageQueue outputQueue)
+        {
+            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
+            inputChannel.ReceiveCompleted += ((object source, ReceiveCompletedEventArgs asyncResult) =>
+            {
+                MessageQueue messageQueue = (MessageQueue)source;
+                var message = messageQueue.EndReceive(asyncResult.AsyncResult);
+                var location = (string)message.Body;
+                Console.WriteLine("Received query from Airline KLM: " + location);
+
+                var reply = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location)).ToString();
+                Console.WriteLine("Responding with string:");
                 Console.WriteLine(reply);
 
                 outputQueue.Send(reply, location);
