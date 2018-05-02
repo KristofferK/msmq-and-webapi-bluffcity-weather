@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineKLM", "AirlineKLM\Ai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineSWA", "AirlineSWA\AirlineSWA.csproj", "{EC72C135-A8D2-4775-A2F1-F828DD9F4D3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineBritishAirways", "AirlineBritishAirways\AirlineBritishAirways.csproj", "{0C035BE7-4C47-4E37-B2E2-76B7E70916D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{EC72C135-A8D2-4775-A2F1-F828DD9F4D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC72C135-A8D2-4775-A2F1-F828DD9F4D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC72C135-A8D2-4775-A2F1-F828DD9F4D3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C035BE7-4C47-4E37-B2E2-76B7E70916D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C035BE7-4C47-4E37-B2E2-76B7E70916D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C035BE7-4C47-4E37-B2E2-76B7E70916D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C035BE7-4C47-4E37-B2E2-76B7E70916D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
