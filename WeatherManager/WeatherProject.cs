@@ -11,6 +11,8 @@ namespace WeatherManager
     {
         private static MessageQueue airTrafficControlCenterInput;
         private static MessageQueue airTrafficControlCenterOutput;
+        private static MessageQueue airportInformationCenterInput;
+        private static MessageQueue airportInformationCenterOutput;
 
         private static WeatherManager weatherManager = new WeatherManager();
         static void Main(string[] args)
@@ -18,34 +20,60 @@ namespace WeatherManager
             airTrafficControlCenterInput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.AirTrafficControlCenter_To_Weather);
             airTrafficControlCenterOutput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_AirTrafficControlCenter);
 
-            Console.Title = "Weather project";
+            airportInformationCenterInput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.AirportInformationCenter_To_Weather);
+            airportInformationCenterOutput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_AirportInformationCenter);
 
-            ReceiveInputFromAirTrafficControlCenter();
+            Console.Title = "Weather project. Receives queries and returns corresponding datatype.";
 
-            Console.ReadLine();
+            ReceiveInputFromAirTrafficControlCenter(airTrafficControlCenterInput, airTrafficControlCenterOutput);
+            ReceiveInputFromAirportInformationCenter(airportInformationCenterInput, airportInformationCenterOutput);
+
+            while (Console.ReadLine() != "exit")
+            {
+                Console.WriteLine("Type 'exit' to exit");
+            }
         }
 
-        private static void ReceiveInputFromAirTrafficControlCenter()
+        private static void ReceiveInputFromAirTrafficControlCenter(MessageQueue inputChannel, MessageQueue outputQueue)
         {
-            airTrafficControlCenterInput.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
-            airTrafficControlCenterInput.ReceiveCompleted += new ReceiveCompletedEventHandler(HandleInputFromAirTrafficControlCenter);
-            airTrafficControlCenterInput.BeginReceive();
+            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
+            inputChannel.ReceiveCompleted += ((object source, ReceiveCompletedEventArgs asyncResult) =>
+            {
+                MessageQueue messageQueue = (MessageQueue)source;
+                var message = messageQueue.EndReceive(asyncResult.AsyncResult);
+                var location = (string)message.Body;
+                Console.WriteLine("Received query from Air Traffic Control Center: " + location);
+
+                var reply = Forecast.GenerateForecastAirTrafficControlCenter(weatherManager.GetForecast(location));
+                Console.WriteLine("Responding with object:");
+                Console.WriteLine(reply);
+
+                airTrafficControlCenterOutput.Send(reply, location);
+
+                messageQueue.BeginReceive();
+            });
+            inputChannel.BeginReceive();
         }
 
-        private static void HandleInputFromAirTrafficControlCenter(object source, ReceiveCompletedEventArgs asyncResult)
+        private static void ReceiveInputFromAirportInformationCenter(MessageQueue inputChannel, MessageQueue outputQueue)
         {
-            MessageQueue messageQueue = (MessageQueue)source;
-            var message = messageQueue.EndReceive(asyncResult.AsyncResult);
-            var location = (string)message.Body;
-            Console.WriteLine("Received query from Air Traffic Control Center: " + location);
+            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
+            inputChannel.ReceiveCompleted += ((object source, ReceiveCompletedEventArgs asyncResult) =>
+            {
+                MessageQueue messageQueue = (MessageQueue)source;
+                var message = messageQueue.EndReceive(asyncResult.AsyncResult);
+                var location = (string)message.Body;
+                Console.WriteLine("Received query from Airport Information Center: " + location);
 
-            var reply = Forecast.GenerateForecastAirTrafficControlCenter(weatherManager.GetForecast(location));
-            Console.WriteLine("Answering with:");
-            Console.WriteLine(reply);
+                var reply = Forecast.GenerateForecastAirportInformationCenter(weatherManager.GetForecast(location));
+                Console.WriteLine("Responding with object:");
+                Console.WriteLine(reply);
 
-            airTrafficControlCenterOutput.Send(reply, location);
+                outputQueue.Send(reply, location);
 
-            messageQueue.BeginReceive();
+                messageQueue.BeginReceive();
+            });
+            inputChannel.BeginReceive();
         }
     }
 }

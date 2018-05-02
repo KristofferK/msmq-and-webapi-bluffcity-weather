@@ -14,18 +14,6 @@ namespace ClassLibrary
         public DateTime Sunrise { get; set; }
         public DateTime Sunset { get; set; }
 
-        public static ForecastAirportInformationCenter Generate(Forecast forecast)
-        {
-            return new ForecastAirportInformationCenter()
-            {
-                City = forecast.City,
-                Country = forecast.Country,
-                Temperature = forecast.Temperature,
-                Sunrise = forecast.Sunrise,
-                Sunset = forecast.Sunset
-            };
-        }
-
         public override string ToString()
         {
             var sb = new StringBuilder();

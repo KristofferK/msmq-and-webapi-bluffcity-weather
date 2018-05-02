@@ -6,18 +6,18 @@ using System.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BluffCityWeather
+namespace AirportInformationCenter
 {
-    class AirTrafficControlCenter
+    class AirportInformationCenter
     {
         private static MessageQueue inputChannel;
         private static MessageQueue outputChannel;
 
         static void Main(string[] args)
         {
-            Console.Title = "Air Traffic Control Center. Receives object.";
-            inputChannel = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_AirTrafficControlCenter);
-            outputChannel = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.AirTrafficControlCenter_To_Weather);
+            Console.Title = "Airport Information Center. Receives object.";
+            inputChannel = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_AirportInformationCenter);
+            outputChannel = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.AirportInformationCenter_To_Weather);
 
             ReceiveResponse();
 
@@ -30,7 +30,7 @@ namespace BluffCityWeather
 
         private static void ReceiveResponse()
         {
-            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(ForecastAirTrafficControlCenter) });
+            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(ForecastAirportInformationCenter) });
             inputChannel.ReceiveCompleted += new ReceiveCompletedEventHandler(HandleResponse);
             inputChannel.BeginReceive();
         }
@@ -38,7 +38,7 @@ namespace BluffCityWeather
         {
             MessageQueue messageQueue = (MessageQueue)source;
             var message = messageQueue.EndReceive(asyncResult.AsyncResult);
-            var body = (ForecastAirTrafficControlCenter)message.Body;
+            var body = (ForecastAirportInformationCenter)message.Body;
 
             Console.WriteLine("Received OBJECT from query: " + message.Label);
             Console.WriteLine(body + "\n\n");

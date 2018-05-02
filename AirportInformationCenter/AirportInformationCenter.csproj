@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62794C9C-E158-43AE-90C0-9869BA9A8202}</ProjectGuid>
+    <ProjectGuid>{97616762-E896-4F47-B12B-C96B209B0108}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>WeatherManager</RootNamespace>
-    <AssemblyName>WeatherManager</AssemblyName>
+    <RootNamespace>AirportInformationCenter</RootNamespace>
+    <AssemblyName>AirportInformationCenter</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WeatherManager.cs" />
-    <Compile Include="WeatherManagerCredentials.cs" />
-    <Compile Include="WeatherProject.cs" />
+    <Compile Include="AirportInformationCenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

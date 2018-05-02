@@ -37,7 +37,6 @@ namespace ClassLibrary
             return sb.ToString();
         }
 
-
         public static ForecastAirTrafficControlCenter GenerateForecastAirTrafficControlCenter(Forecast forecast)
         {
             return new ForecastAirTrafficControlCenter()
@@ -51,6 +50,18 @@ namespace ClassLibrary
                 Wind = forecast.Wind,
                 Cloud = forecast.Cloud,
                 Visibility = forecast.Visibility
+            };
+        }
+
+        public static ForecastAirportInformationCenter GenerateForecastAirportInformationCenter(Forecast forecast)
+        {
+            return new ForecastAirportInformationCenter()
+            {
+                City = forecast.City,
+                Country = forecast.Country,
+                Temperature = forecast.Temperature,
+                Sunrise = forecast.Sunrise,
+                Sunset = forecast.Sunset
             };
         }
     }
