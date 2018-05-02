@@ -30,7 +30,7 @@ namespace AirportInformationCenter
 
         private static void ReceiveResponse()
         {
-            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(ForecastAirportInformationCenter) });
+            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(WeatherConditionAirportInformationCenter) });
             inputChannel.ReceiveCompleted += new ReceiveCompletedEventHandler(HandleResponse);
             inputChannel.BeginReceive();
         }
@@ -38,7 +38,7 @@ namespace AirportInformationCenter
         {
             MessageQueue messageQueue = (MessageQueue)source;
             var message = messageQueue.EndReceive(asyncResult.AsyncResult);
-            var body = (ForecastAirportInformationCenter)message.Body;
+            var body = (WeatherConditionAirportInformationCenter)message.Body;
 
             Console.WriteLine("Received OBJECT from query: " + message.Label);
             Console.WriteLine(body + "\n\n");

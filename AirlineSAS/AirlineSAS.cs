@@ -30,7 +30,7 @@ namespace AirlineSAS
 
         private static void ReceiveResponse()
         {
-            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(ForecastAirlineCompany) });
+            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(WeatherConditionAirlineCompany) });
             inputChannel.ReceiveCompleted += new ReceiveCompletedEventHandler(HandleResponse);
             inputChannel.BeginReceive();
         }
@@ -38,7 +38,7 @@ namespace AirlineSAS
         {
             MessageQueue messageQueue = (MessageQueue)source;
             var message = messageQueue.EndReceive(asyncResult.AsyncResult);
-            var body = (ForecastAirlineCompany)message.Body;
+            var body = (WeatherConditionAirlineCompany)message.Body;
 
             Console.WriteLine("Received OBJECT from query: " + message.Label);
             Console.WriteLine(body + "\n\n");

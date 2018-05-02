@@ -55,7 +55,7 @@ namespace WeatherManager
                 var location = (string)message.Body;
                 Console.WriteLine("Received query from Air Traffic Control Center: " + location);
 
-                var reply = Forecast.GenerateForecastAirTrafficControlCenter(weatherManager.GetForecast(location));
+                var reply = WeatherCondition.GenerateWeatherConditionAirTrafficControlCenter(weatherManager.GetCurrentWeatherCondition(location));
                 Console.WriteLine("Responding with object:");
                 Console.WriteLine(reply);
 
@@ -76,7 +76,7 @@ namespace WeatherManager
                 var location = (string)message.Body;
                 Console.WriteLine("Received query from Airport Information Center: " + location);
 
-                var reply = Forecast.GenerateForecastAirportInformationCenter(weatherManager.GetForecast(location));
+                var reply = WeatherCondition.GenerateWeatherConditionAirportInformationCenter(weatherManager.GetCurrentWeatherCondition(location));
                 Console.WriteLine("Responding with object:");
                 Console.WriteLine(reply);
 
@@ -97,7 +97,7 @@ namespace WeatherManager
                 var location = (string)message.Body;
                 Console.WriteLine("Received query from Airline SAS: " + location);
 
-                var reply = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location));
+                var reply = WeatherCondition.GenerateWeatherConditionAirlineCompany(weatherManager.GetCurrentWeatherCondition(location));
                 Console.WriteLine("Responding with object:");
                 Console.WriteLine(reply);
 
@@ -118,7 +118,7 @@ namespace WeatherManager
                 var location = (string)message.Body;
                 Console.WriteLine("Received query from Airline KLM: " + location);
 
-                var reply = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location)).ToString();
+                var reply = WeatherCondition.GenerateWeatherConditionAirlineCompany(weatherManager.GetCurrentWeatherCondition(location)).ToString();
                 Console.WriteLine("Responding with string:");
                 Console.WriteLine(reply);
 
@@ -139,9 +139,9 @@ namespace WeatherManager
                 var location = (string)message.Body;
                 Console.WriteLine("Received query from Airline SWA: " + location);
 
-                var forecast = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location));
-                var forecastFeed = XmlHelper.Serialize<ForecastAirlineCompany>(forecast);
-                var reply = XmlHelper.GenerateDocumentFromFeed(forecastFeed);
+                var weather = WeatherCondition.GenerateWeatherConditionAirlineCompany(weatherManager.GetCurrentWeatherCondition(location));
+                var weatherFeed = XmlHelper.Serialize<WeatherConditionAirlineCompany>(weather);
+                var reply = XmlHelper.GenerateDocumentFromFeed(weatherFeed);
 
                 Console.WriteLine("Responding with XmlDocument:");
                 Console.WriteLine(reply + " with the content:");
@@ -164,9 +164,9 @@ namespace WeatherManager
                 var location = (string)message.Body;
                 Console.WriteLine("Received query from Airline British Airways: " + location);
 
-                var forecast = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location));
-                var forecastFeed = XmlHelper.Serialize<ForecastAirlineCompany>(forecast);
-                var reply = XmlHelper.GenerateDocumentFromFeed(forecastFeed);
+                var weather = WeatherCondition.GenerateWeatherConditionAirlineCompany(weatherManager.GetCurrentWeatherCondition(location));
+                var weatherFeed = XmlHelper.Serialize<WeatherConditionAirlineCompany>(weather);
+                var reply = XmlHelper.GenerateDocumentFromFeed(weatherFeed);
 
                 Console.WriteLine("Responding with XmlDocument:");
                 Console.WriteLine(reply + " with the content:");

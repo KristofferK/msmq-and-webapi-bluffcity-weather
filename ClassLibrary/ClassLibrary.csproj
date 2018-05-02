@@ -42,10 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coordainte.cs" />
-    <Compile Include="Forecast.cs" />
-    <Compile Include="ForecastAirlineCompany.cs" />
-    <Compile Include="ForecastAirportInformationCenter.cs" />
-    <Compile Include="ForecastAirTrafficControlCenter.cs" />
+    <Compile Include="WeatherCondition.cs" />
+    <Compile Include="WeatherConditionAirlineCompany.cs" />
+    <Compile Include="WeatherConditionAirportInformationCenter.cs" />
+    <Compile Include="WeatherConditionAirTrafficControlCenter.cs" />
     <Compile Include="MessageQueueGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wind.cs" />

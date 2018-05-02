@@ -17,39 +17,39 @@ namespace WeatherManager
     {
         private const string API_KEY = WeatherManagerCredentials.API_KEY;
 
-        public Forecast GetForecast(string location)
+        public WeatherCondition GetCurrentWeatherCondition(string location)
         {
-            var xml = GetForecastXml(location);
+            var xml = GetCurrentWeatherXML(location);
 
             CultureInfo ci = new CultureInfo("en-GB");
             Thread.CurrentThread.CurrentCulture = ci;
             Thread.CurrentThread.CurrentUICulture = ci;
 
-            var forecast = new Forecast();
-            forecast.City = xml.SelectSingleNode("/current/city").Attributes["name"].Value;
-            forecast.Cloud = int.Parse(xml.SelectSingleNode("/current/clouds").Attributes["value"].Value);
-            forecast.Coordinates = new Coordainte()
+            var weather = new WeatherCondition();
+            weather.City = xml.SelectSingleNode("/current/city").Attributes["name"].Value;
+            weather.Cloud = int.Parse(xml.SelectSingleNode("/current/clouds").Attributes["value"].Value);
+            weather.Coordinates = new Coordainte()
             {
                 Latitude = double.Parse(xml.SelectSingleNode("/current/city/coord").Attributes["lat"].Value),
                 Longitude = double.Parse(xml.SelectSingleNode("/current/city/coord").Attributes["lon"].Value)
             };
-            forecast.Country = xml.SelectSingleNode("/current/city/country").InnerText;
-            forecast.Humidity = int.Parse(xml.SelectSingleNode("/current/humidity").Attributes["value"].Value);
-            forecast.Pressure = int.Parse(xml.SelectSingleNode("/current/pressure").Attributes["value"].Value);
-            forecast.Sunrise = DateTimeFromString(xml.SelectSingleNode("/current/city/sun").Attributes["rise"].InnerText);
-            forecast.Sunset = DateTimeFromString(xml.SelectSingleNode("/current/city/sun").Attributes["set"].InnerText);
-            forecast.Temperature = (double.Parse(xml.SelectSingleNode("/current/temperature").Attributes["value"].Value) - 32) / 1.8;
-            // forecast.Visibility = 
-            forecast.Wind = new Wind()
+            weather.Country = xml.SelectSingleNode("/current/city/country").InnerText;
+            weather.Humidity = int.Parse(xml.SelectSingleNode("/current/humidity").Attributes["value"].Value);
+            weather.Pressure = int.Parse(xml.SelectSingleNode("/current/pressure").Attributes["value"].Value);
+            weather.Sunrise = DateTimeFromString(xml.SelectSingleNode("/current/city/sun").Attributes["rise"].InnerText);
+            weather.Sunset = DateTimeFromString(xml.SelectSingleNode("/current/city/sun").Attributes["set"].InnerText);
+            weather.Temperature = (double.Parse(xml.SelectSingleNode("/current/temperature").Attributes["value"].Value) - 32) / 1.8;
+            // weather.Visibility = 
+            weather.Wind = new Wind()
             {
                 Degree = int.Parse(xml.SelectSingleNode("/current/wind/direction").Attributes["value"].Value),
                 Speed = double.Parse(xml.SelectSingleNode("/current/wind/speed").Attributes["value"].Value),
             };
-            return forecast;
+            return weather;
         }
 
 
-        private XmlDocument GetForecastXml(string location)
+        private XmlDocument GetCurrentWeatherXML(string location)
         {
             location = WebUtility.UrlEncode(location);
             return GetSourceAsXml("http://api.openweathermap.org/data/2.5/weather?q=" + location + "&mode=xml&units=imperial&APPID=" + API_KEY);

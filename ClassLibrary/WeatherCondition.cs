@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class Forecast
+    public class WeatherCondition
     {
         public string City { get; set; }
         public Coordainte Coordinates { get; set; }
@@ -37,42 +37,42 @@ namespace ClassLibrary
             return sb.ToString();
         }
 
-        public static ForecastAirTrafficControlCenter GenerateForecastAirTrafficControlCenter(Forecast forecast)
+        public static WeatherConditionAirTrafficControlCenter GenerateWeatherConditionAirTrafficControlCenter(WeatherCondition weather)
         {
-            return new ForecastAirTrafficControlCenter()
+            return new WeatherConditionAirTrafficControlCenter()
             {
-                City = forecast.City,
-                Coordinates = forecast.Coordinates,
-                Country = forecast.Country,
-                Temperature = forecast.Temperature,
-                Humidity = forecast.Humidity,
-                Pressure = forecast.Pressure,
-                Wind = forecast.Wind,
-                Cloud = forecast.Cloud,
-                Visibility = forecast.Visibility
+                City = weather.City,
+                Coordinates = weather.Coordinates,
+                Country = weather.Country,
+                Temperature = weather.Temperature,
+                Humidity = weather.Humidity,
+                Pressure = weather.Pressure,
+                Wind = weather.Wind,
+                Cloud = weather.Cloud,
+                Visibility = weather.Visibility
             };
         }
 
-        public static ForecastAirportInformationCenter GenerateForecastAirportInformationCenter(Forecast forecast)
+        public static WeatherConditionAirportInformationCenter GenerateWeatherConditionAirportInformationCenter(WeatherCondition weather)
         {
-            return new ForecastAirportInformationCenter()
+            return new WeatherConditionAirportInformationCenter()
             {
-                City = forecast.City,
-                Country = forecast.Country,
-                Temperature = forecast.Temperature,
-                Sunrise = forecast.Sunrise,
-                Sunset = forecast.Sunset
+                City = weather.City,
+                Country = weather.Country,
+                Temperature = weather.Temperature,
+                Sunrise = weather.Sunrise,
+                Sunset = weather.Sunset
             };
         }
 
-        public static ForecastAirlineCompany GenerateForecastAirlineCompany(Forecast forecast)
+        public static WeatherConditionAirlineCompany GenerateWeatherConditionAirlineCompany(WeatherCondition weather)
         {
-            return new ForecastAirlineCompany()
+            return new WeatherConditionAirlineCompany()
             {
-                City = forecast.City,
-                Country = forecast.Country,
-                Temperature = forecast.Temperature,
-                Cloud = forecast.Cloud
+                City = weather.City,
+                Country = weather.Country,
+                Temperature = weather.Temperature,
+                Cloud = weather.Cloud
             };
         }
     }

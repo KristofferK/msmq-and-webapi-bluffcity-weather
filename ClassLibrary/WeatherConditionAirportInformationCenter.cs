@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class ForecastAirportInformationCenter
+    public class WeatherConditionAirportInformationCenter
     {
         public string City { get; set; }
         public string Country { get; set; }
