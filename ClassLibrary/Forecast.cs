@@ -64,5 +64,16 @@ namespace ClassLibrary
                 Sunset = forecast.Sunset
             };
         }
+
+        public static ForecastAirlineCompany GenerateForecastAirlineCompany(Forecast forecast)
+        {
+            return new ForecastAirlineCompany()
+            {
+                City = forecast.City,
+                Country = forecast.Country,
+                Temperature = forecast.Temperature,
+                Cloud = forecast.Cloud
+            };
+        }
     }
 }

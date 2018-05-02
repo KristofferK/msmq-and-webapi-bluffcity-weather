@@ -13,17 +13,6 @@ namespace ClassLibrary
         public double Temperature { get; set; }
         public int Cloud { get; set; }
 
-        public static ForecastAirlineCompany Generate(Forecast forecast)
-        {
-            return new ForecastAirlineCompany()
-            {
-                City = forecast.City,
-                Country = forecast.Country,
-                Temperature = forecast.Temperature,
-                Cloud = forecast.Cloud
-            };
-        }
-
         public override string ToString()
         {
             var sb = new StringBuilder();

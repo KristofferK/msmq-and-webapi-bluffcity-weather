@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherProject", "WeatherMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirportInformationCenter", "AirportInformationCenter\AirportInformationCenter.csproj", "{97616762-E896-4F47-B12B-C96B209B0108}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineSAS", "AirlineSAS\AirlineSAS.csproj", "{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{97616762-E896-4F47-B12B-C96B209B0108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97616762-E896-4F47-B12B-C96B209B0108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97616762-E896-4F47-B12B-C96B209B0108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D05FB6-0A17-45E9-8EAD-BF5D54D2F0D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
