@@ -26,10 +26,14 @@ namespace WeatherManager
             var airlineKLMInput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Airline_KLM_To_Weather);
             var airlineKLMOutput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_Airline_KLM);
 
+            var airlineSWAInput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Airline_SWA_To_Weather);
+            var airlineSWAOutput = MessageQueueGenerator.GenerateMessageQueue(MessageQueueGenerator.Weather_To_Airline_SWA);
+
             ReceiveInputFromAirTrafficControlCenter(airTrafficControlCenterInput, airTrafficControlCenterOutput);
             ReceiveInputFromAirportInformationCenter(airportInformationCenterInput, airportInformationCenterOutput);
             ReceiveInputFromAirlineSAS(airlineSASInput, airlineSASOutput);
             ReceiveInputFromAirlineKLM(airlineKLMInput, airlineKLMOutput);
+            ReceiveInputFromAirlineSWA(airlineSWAInput, airlineSWAOutput);
 
             while (Console.ReadLine() != "exit")
             {
@@ -113,6 +117,31 @@ namespace WeatherManager
                 var reply = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location)).ToString();
                 Console.WriteLine("Responding with string:");
                 Console.WriteLine(reply);
+
+                outputQueue.Send(reply, location);
+
+                messageQueue.BeginReceive();
+            });
+            inputChannel.BeginReceive();
+        }
+
+        private static void ReceiveInputFromAirlineSWA(MessageQueue inputChannel, MessageQueue outputQueue)
+        {
+            inputChannel.Formatter = new XmlMessageFormatter(new Type[] { typeof(string) });
+            inputChannel.ReceiveCompleted += ((object source, ReceiveCompletedEventArgs asyncResult) =>
+            {
+                MessageQueue messageQueue = (MessageQueue)source;
+                var message = messageQueue.EndReceive(asyncResult.AsyncResult);
+                var location = (string)message.Body;
+                Console.WriteLine("Received query from Airline SWA: " + location);
+
+                var forecast = Forecast.GenerateForecastAirlineCompany(weatherManager.GetForecast(location));
+                var forecastFeed = XmlHelper.Serialize<ForecastAirlineCompany>(forecast);
+                var reply = XmlHelper.GenerateDocumentFromFeed(forecastFeed);
+
+                Console.WriteLine("Responding with XmlDocument:");
+                Console.WriteLine(reply + " with the content:");
+                Console.WriteLine(reply.OuterXml);
 
                 outputQueue.Send(reply, location);
 
