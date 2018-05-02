@@ -20,8 +20,8 @@ namespace ClassLibrary
             sb.AppendLine($"City: {City}");
             sb.AppendLine($"Country: {Country}");
             sb.AppendLine($"Temperature: {Temperature}");
-            sb.AppendLine($"Sunrise: {Sunrise.ToLongDateString()}");
-            sb.AppendLine($"Sunset: {Sunset.ToLongDateString()}");
+            sb.AppendLine($"Sunrise: {Sunrise.ToLongDateString()} {Sunrise.ToLongTimeString()}");
+            sb.AppendLine($"Sunset: {Sunset.ToLongDateString()} {Sunset.ToLongTimeString()}");
             return sb.ToString();
         }
     }
